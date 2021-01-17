@@ -7,10 +7,6 @@
 
     <display-name>maven-servlet-sample</display-name>
 
-    <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-    </welcome-file-list>
-
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>com.golovkin.chat.web.servlets.LoginServlet</servlet-class>
