@@ -12,9 +12,11 @@ public class Message {
     private Integer id;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "senderid")
     private User sender;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "receiverid")
     private User receiver;
 
     @Column(nullable = false)

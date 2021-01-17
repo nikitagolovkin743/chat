@@ -13,23 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
-
-    // Пользователи по умолчанию
-    @Override
-    public void init() throws ServletException {
-        super.init();
-
-        var user1 = new User("Nikita", "qwerty");
-        var user2 = new User("Ivan", "qwerty");
-        var user3 = new User("BlockedUser", "qwerty");
-        var user4 = new User("ReadonlyUser", "qwerty");
-
-        UserDao.instance.persist(user1);
-        UserDao.instance.persist(user2);
-        UserDao.instance.persist(user3);
-        UserDao.instance.persist(user4);
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         var webContext = new WebContext(req, resp, getServletContext());

@@ -11,13 +11,12 @@ http://xmlns.jcp.org/xml/ns/persistence_2_1.xsd">
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <property
-                    name="javax.persistence.schema-generation.database.action"
-                    value="drop-and-create"/>
             <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.connection.url" value="jdbc:h2:mem:"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost/chat"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL94Dialect"/>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="root"/>
         </properties>
     </persistence-unit>
 
