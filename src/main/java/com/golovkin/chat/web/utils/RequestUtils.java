@@ -12,7 +12,7 @@ public class RequestUtils {
     }
 
     public static int getParameterAsInt(String parameterName, HttpServletRequest request) {
-        var parameter = request.getParameter(parameterName);
+        String parameter = request.getParameter(parameterName);
 
         return Integer.parseInt(parameter);
     }

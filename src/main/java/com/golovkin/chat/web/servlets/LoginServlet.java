@@ -15,16 +15,16 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var webContext = new WebContext(req, resp, getServletContext());
+        WebContext webContext = new WebContext(req, resp, getServletContext());
         TemplateEngine.renderPage("login", webContext, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var username = req.getParameter("login");
-        var password = req.getParameter("password");
+        String username = req.getParameter("login");
+        String password = req.getParameter("password");
 
-        var webContext = new WebContext(req, resp, getServletContext());
+        WebContext webContext = new WebContext(req, resp, getServletContext());
 
         if (!ValidationChecks.isUsernameValid(username) || !ValidationChecks.isPasswordValid(password)) {
             webContext.setVariable("invalidCredentials", true);

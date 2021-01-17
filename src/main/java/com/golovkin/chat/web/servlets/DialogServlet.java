@@ -15,23 +15,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 
 public class DialogServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var webContext = new WebContext(req, resp, getServletContext());
+        WebContext webContext = new WebContext(req, resp, getServletContext());
 
-        var sender = RequestUtils.getSessionAttribute("currentUser", User.class, req);
+        User sender = RequestUtils.getSessionAttribute("currentUser", User.class, req);
 
-        var receiverId = RequestUtils.getParameterAsInt("id", req);
-        var receiver = UserDao.instance.findById(receiverId);
+        int receiverId = RequestUtils.getParameterAsInt("id", req);
+        User receiver = UserDao.instance.findById(receiverId);
         if (receiver == null) {
             webContext.setVariable("errorMessage", "Собеседник с таким ID не найден. :(");
             TemplateEngine.renderPage("error", webContext, resp);
             return;
         }
 
-        var messages = MessageDao.instance.findMessagesBetweenUsers(sender, receiver);
+        List<Message> messages = MessageDao.instance.findMessagesBetweenUsers(sender, receiver);
 
         webContext.setVariable("sender", sender);
         webContext.setVariable("receiver", receiver);
@@ -43,21 +44,21 @@ public class DialogServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var sender = RequestUtils.getSessionAttribute("currentUser", User.class, req);
-        var isSenderReadonly = (boolean) req.getAttribute("readonly");
+        User sender = RequestUtils.getSessionAttribute("currentUser", User.class, req);
+        boolean isSenderReadonly = (boolean) req.getAttribute("readonly");
 
-        var receiverId = RequestUtils.getParameterAsInt("receiverId", req);
+        int receiverId = RequestUtils.getParameterAsInt("receiverId", req);
 
         if (!isSenderReadonly) {
-            var receiver = UserDao.instance.findById(receiverId);
+            User receiver = UserDao.instance.findById(receiverId);
             if (receiver == null) {
-                var webContext = new WebContext(req, resp, getServletContext());
+                WebContext webContext = new WebContext(req, resp, getServletContext());
                 webContext.setVariable("errorMessage", "Собеседник с таким ID не найден. :(");
                 TemplateEngine.renderPage("error", webContext, resp);
                 return;
             }
 
-            var messageText = req.getParameter("message");
+            String messageText = req.getParameter("message");
             if (ValidationChecks.isValidMessageText(messageText)) {
                 Message message = new Message(sender, receiver, messageText.trim(), Timestamp.from(Instant.now()));
                 MessageDao.instance.persist(message);

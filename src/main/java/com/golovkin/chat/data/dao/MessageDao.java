@@ -4,6 +4,8 @@ import com.golovkin.chat.data.entities.Message;
 import com.golovkin.chat.data.entities.User;
 import com.golovkin.chat.data.utils.EntityManagerProvider;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 // +
@@ -12,13 +14,13 @@ public class MessageDao extends AbstractDao<Message> {
 
     @SuppressWarnings("unchecked")
     public List<Message> findMessagesBetweenUsers(User sender, User receiver) {
-        var entityManager = EntityManagerProvider.createEntityManager();
+        EntityManager entityManager = EntityManagerProvider.createEntityManager();
 
-        var query = entityManager.createQuery("SELECT m FROM Message m WHERE (m.sender = :sender AND m.receiver = :receiver) OR (m.sender = :receiver AND m.receiver = :sender) ORDER BY m.timestamp");
+        Query query = entityManager.createQuery("SELECT m FROM Message m WHERE (m.sender = :sender AND m.receiver = :receiver) OR (m.sender = :receiver AND m.receiver = :sender) ORDER BY m.timestamp");
         query.setParameter("sender", sender);
         query.setParameter("receiver", receiver);
 
-        var messages = (List<Message>) query.getResultList();
+        List<Message> messages = (List<Message>) query.getResultList();
 
         entityManager.close();
 

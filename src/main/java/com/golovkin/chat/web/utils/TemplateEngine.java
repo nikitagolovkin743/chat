@@ -5,12 +5,13 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class TemplateEngine {
     private final static org.thymeleaf.TemplateEngine templateEngine;
 
     static {
-        var templateResolver = new ClassLoaderTemplateResolver(TemplateEngine.class.getClassLoader());
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver(TemplateEngine.class.getClassLoader());
         templateResolver.setPrefix("/templates/");
         templateResolver.setSuffix(".html");
         templateResolver.setCacheable(false);
@@ -20,7 +21,7 @@ public class TemplateEngine {
     }
 
     public static void renderPage(String templateName, WebContext webContext, HttpServletResponse resp) throws IOException {
-        try (var writer = resp.getWriter()) {
+        try (PrintWriter writer = resp.getWriter()) {
             templateEngine.process(templateName, webContext, writer);
         }
     }

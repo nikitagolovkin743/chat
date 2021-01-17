@@ -12,7 +12,7 @@ import java.io.IOException;
 public abstract class AbstractServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var webContext = new WebContext(req, resp, getServletContext());
+        WebContext webContext = new WebContext(req, resp, getServletContext());
         setupGetWebContext(webContext, req, resp, getServletContext());
 
         TemplateEngine.renderPage(getGetTemplateName(), webContext, resp);

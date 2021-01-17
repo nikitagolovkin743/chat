@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class UserlistServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        var webContext = new WebContext(req, resp, getServletContext());
+        WebContext webContext = new WebContext(req, resp, getServletContext());
         User currentUser = RequestUtils.getSessionAttribute("currentUser", User.class, req);
 
-        var users = UserDao.findAllUsersExceptId(currentUser.getId());
+        List<User> users = UserDao.findAllUsersExceptId(currentUser.getId());
         webContext.setVariable("users", users);
 
         TemplateEngine.renderPage("users", webContext, resp);
