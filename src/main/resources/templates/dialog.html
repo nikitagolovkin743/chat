@@ -12,7 +12,7 @@
             background-color: #1e2f35;
             font-family: Calibri, sans-serif;
 
-            color:white;
+            color: white;
         }
 
         .flex-center {
@@ -86,8 +86,8 @@
 
 
         #Footer {
-            position:fixed;
-            bottom:0;
+            position: fixed;
+            bottom: 0;
         }
     </style>
 </head>
@@ -96,29 +96,31 @@
 
 <div style="padding: 0 0 0 1em;">
     <div style="display: flex; flex-direction: column;  align-items: center;">
-        <h1 style="margin-bottom: 0;" class="light-green" th:text="${'Собеседник ' + receiver.name}">Собеседник ...</h1>
-        <a style="margin: 0 0 0 0em; font-size: 0.9em;" href="/users">К списку пользователей</a>
+        <h1 class="light-green" style="margin-bottom: 0;" th:text="${'Собеседник ' + receiver.name}">Собеседник ...</h1>
+        <a href="/users" style="margin: 0 0 0 0em; font-size: 0.9em;">К списку пользователей</a>
     </div>
 
     <div style="margin: 1em 0 1em 0; height: 60vh; overflow:auto;">
-        <div th:each="message: ${messages}" style="margin-bottom: 2em;">
-            <div><span style="font-weight: bold; font-size: 1.1em;" th:text="${message.sender.name}">Имя пользователя</span> <span th:text="${#dates.format(message.timestamp, 'HH:mm, dd MMM yyyy')}" style="font-size: 0.7em; color: rgb(167, 167, 167); margin-left: 1em;">Дата</span></div>
+        <div style="margin-bottom: 2em;" th:each="message: ${messages}">
+            <div><span style="font-weight: bold; font-size: 1.1em;"
+                       th:text="${message.sender.name}">Имя пользователя</span> <span
+                    style="font-size: 0.7em; color: rgb(167, 167, 167); margin-left: 1em;"
+                    th:text="${#dates.format(message.timestamp, 'HH:mm, dd MMM yyyy')}">Дата</span></div>
 
-            <p th:text="${message.message}" style="margin: 0.3em 0 0 0;">Сообщение</p>
+            <p style="margin: 0.3em 0 0 0;" th:text="${message.message}">Сообщение</p>
         </div>
     </div>
 </div>
 
 <div id="Footer" style="width: 100%; margin: 0;">
     <form method="POST" style="width: 100%">
-        <textarea style="width: 100%" maxlength="255" name="message" placeholder="Введите сообщение"></textarea>
-        <input type="hidden" name="receiverId" th:value="${receiver.id}">
+        <textarea maxlength="255" name="message" placeholder="Введите сообщение" style="width: 100%"></textarea>
+        <input name="receiverId" th:value="${receiver.id}" type="hidden">
         <input th:if="${not readonly}" type="submit" value="Отправить">
-        <input th:unless="${not readonly}" type="submit" value="Только чтение" disabled>
+        <input disabled th:unless="${not readonly}" type="submit" value="Только чтение">
     </form>
 </div>
 </body>
-
 
 
 </html>

@@ -91,25 +91,25 @@
 
         <form class="form" method="POST">
             <div class="input-group">
-                <label class="input-label"  for="login">Логин</label>
-                <input type="text" id="login" name="login">
+                <label class="input-label" for="login">Логин</label>
+                <input id="login" name="login" type="text">
                 <span class="error" th:if="${invalidUsername}">Некорректное имя пользователя</span>
                 <span class="error" th:if="${userExists}">Пользователь уже существует</span>
             </div>
 
             <div class="input-group">
-                <label class="input-label"  for="password">Пароль</label>
-                <input type="password" id="password" name="password">
+                <label class="input-label" for="password">Пароль</label>
+                <input id="password" name="password" type="password">
                 <span class="error" th:if="${invalidPassword}">Некорректный пароль</span>
                 <span class="error" th:if="${noMatch}">Пароли не совпадают</span>
             </div>
 
             <div class="input-group">
-                <label class="input-label"  for="repeated-password">Повторите пароль</label>
-                <input type="password" id="repeated-password" name="repeated-password">
+                <label class="input-label" for="repeated-password">Повторите пароль</label>
+                <input id="repeated-password" name="repeated-password" type="password">
             </div>
 
-            <input class="button"type="Submit" value="Зарегистрироваться">
+            <input class="button" type="Submit" value="Зарегистрироваться">
         </form>
     </div>
 </div>

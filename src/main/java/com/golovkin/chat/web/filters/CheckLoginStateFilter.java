@@ -33,14 +33,14 @@ public class CheckLoginStateFilter implements Filter {
     }
 
     private HashSet<String> getForbiddenUrlsForNonLoginedUser() {
-        var forbiddenUrlsForNonLoginedUser = new HashSet<String>();
+        HashSet<String> forbiddenUrlsForNonLoginedUser = new HashSet<String>();
         forbiddenUrlsForNonLoginedUser.add("/users");
         forbiddenUrlsForNonLoginedUser.add("/dialog");
         return forbiddenUrlsForNonLoginedUser;
     }
 
     private HashSet<String> getForbiddenUrlsForLoginedUser() {
-        var forbiddenUrlsForLoginedUser = new HashSet<String>();
+        HashSet<String> forbiddenUrlsForLoginedUser = new HashSet<String>();
         forbiddenUrlsForLoginedUser.add("/login");
         forbiddenUrlsForLoginedUser.add("/logup");
         return forbiddenUrlsForLoginedUser;

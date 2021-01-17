@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Set;
 
 public class BannedUsersFilter implements Filter {
@@ -15,7 +16,7 @@ public class BannedUsersFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        var bannedUsers = BannedUsersFilter.class.getResourceAsStream("/BannedUsers.txt");
+        InputStream bannedUsers = BannedUsersFilter.class.getResourceAsStream("/BannedUsers.txt");
 
         bannedUserNames = IoUtils.getSetWithLinesFrom(bannedUsers);
     }
@@ -25,11 +26,11 @@ public class BannedUsersFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
-        var username = request.getParameter("login");
-        var isPostMethod = httpServletRequest.getMethod().equals("POST");
+        String username = request.getParameter("login");
+        boolean isPostMethod = httpServletRequest.getMethod().equals("POST");
 
         if (isUsernameBanned(username) && isPostMethod) {
-            var webContext = new WebContext(httpServletRequest, httpServletResponse, request.getServletContext());
+            WebContext webContext = new WebContext(httpServletRequest, httpServletResponse, request.getServletContext());
             webContext.setVariable("errorMessage", "Вы забанены. :(");
             TemplateEngine.renderPage("error", webContext, httpServletResponse);
         } else {

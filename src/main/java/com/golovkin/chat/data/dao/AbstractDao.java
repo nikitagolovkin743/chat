@@ -2,11 +2,14 @@ package com.golovkin.chat.data.dao;
 
 import com.golovkin.chat.data.utils.EntityManagerProvider;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 // +
 abstract class AbstractDao<T> {
     public void persist(T object) {
-        var entityManager = EntityManagerProvider.createEntityManager();
-        var transaction = entityManager.getTransaction();
+        EntityManager entityManager = EntityManagerProvider.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
 
         transaction.begin();
         entityManager.persist(object);
@@ -16,8 +19,8 @@ abstract class AbstractDao<T> {
     }
 
     public void update(T object) {
-        var entityManager = EntityManagerProvider.createEntityManager();
-        var transaction = entityManager.getTransaction();
+        EntityManager entityManager = EntityManagerProvider.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
 
         transaction.begin();
         entityManager.merge(object);
@@ -27,8 +30,8 @@ abstract class AbstractDao<T> {
     }
 
     public void delete(T object) {
-        var entityManager = EntityManagerProvider.createEntityManager();
-        var transaction = entityManager.getTransaction();
+        EntityManager entityManager = EntityManagerProvider.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
 
         transaction.begin();
         entityManager.remove(object);
