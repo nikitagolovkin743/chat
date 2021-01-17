@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login</title>
+    <style>
+        html,
+        body,
+        .main {
+            height: 100%;
+            margin: 0 0 0 1em;
+            background-color: #1e2f35;
+            font-family: Calibri, sans-serif;
+
+            color:white;
+        }
+
+        .light-green {
+            color: #9eefa8;
+        }
+
+        a {
+            outline: none;
+            text-decoration: none;
+            color: #7ac36f;
+            margin:
+        }
+
+        a:hover {
+            color: #9eefa8;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+<h1 class="light-green">Ошибка</h1>
+<p th:text="${errorMessage}">Текст ошибки</p>
+</body>
+</html>

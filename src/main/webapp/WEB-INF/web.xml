@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" metadata-complete="true">
+
+    <display-name>maven-servlet-sample</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.golovkin.chat.web.servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logup</servlet-name>
+        <servlet-class>com.golovkin.chat.web.servlets.LogupServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logup</servlet-name>
+        <url-pattern>/logup</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.golovkin.chat.web.servlets.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Users</servlet-name>
+        <servlet-class>com.golovkin.chat.web.servlets.UserlistServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Users</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Dialog</servlet-name>
+        <servlet-class>com.golovkin.chat.web.servlets.DialogServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Dialog</servlet-name>
+        <url-pattern>/dialog</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>Encoding</filter-name>
+        <filter-class>com.golovkin.chat.web.filters.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>СheckLoginState</filter-name>
+        <filter-class>com.golovkin.chat.web.filters.CheckLoginStateFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>СheckLoginState</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>BanFilter</filter-name>
+        <filter-class>com.golovkin.chat.web.filters.BannedUsersFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>BanFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>ReadonlyFilter</filter-name>
+        <filter-class>com.golovkin.chat.web.filters.ReadonlyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ReadonlyFilter</filter-name>
+        <url-pattern>/dialog</url-pattern>
+    </filter-mapping>
+</web-app>
